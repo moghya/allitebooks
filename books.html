@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet"  href=""
+</head>
+<body>
+<select id="cat" onchange="load(this.value)"></select>
+<p id="stats"></p>
+<table id="haha"></table>
+<script src="stats.js"></script>
+<script src="bookdata_final.js"></script>
+<script>
+    function loadcat(){
+        var text = "<option value=''>Select Category</option>";
+        var cats = stats['categories'];
+        for(c in cats) text = text + "<option value='"+cats[c]+"'>"+cats[c]+"</option>";
+        document.getElementById("cat").innerHTML = text;
+    }
+    function load(category) {
+        var table = document.getElementById("haha");
+        var html = '<tr><th>Book name</th><th>Download</th></tr>';
+        var x = 0;
+        for (key in wdata) {
+            if(match(wdata[key]['cat'],category)) {
+                x = x + 1;
+                var pdf = wdata[key]['pdf'];
+                html = html + '<tr><td>' + key + '</td><td><a href="' + pdf + '" download><button>getME</button></a></td></tr>';
+            }
+        }
+        table.innerHTML = html;
+        document.getElementById("stats").innerHTML = "Total No of Books " + x;
+    }
+    function match(list,value){
+        for(c in list)
+            if(list[c]==value) return true;
+        return false;
+    }
+    loadcat();
+</script>
+</body>
+</html>

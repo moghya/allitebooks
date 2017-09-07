@@ -15,6 +15,7 @@
     function loadcat(){
         var text = "<option value=''>Select Category</option>";
         var cats = stats['categories'];
+	cats.sort();
         for(c in cats) text = text + "<option value='"+cats[c]+"'>"+cats[c]+"</option>";
         document.getElementById("cat").innerHTML = text;
     }
@@ -38,6 +39,6 @@
         return false;
     }
     loadcat();
-</script>
+    </script>
 </body>
 </html>

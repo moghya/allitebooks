@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
-    <link rel="stylesheet"  href=""
+    <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-<select id="cat" onchange="load(this.value)"></select>
+<div class="container">
+<br>
+<br>
+<select id="cat" onchange="load(this.value)" class="form-control"></select>
+<br>
+<br>
 <p id="stats"></p>
-<table id="haha"></table>
+<hr>
+<table id="haha" class="table table-hover table-responsive table-bordered"></table>
 <script src="stats.js"></script>
 <script src="bookdata_final.js"></script>
 <script>
@@ -21,17 +27,19 @@
     }
     function load(category) {
         var table = document.getElementById("haha");
-        var html = '<tr><th>Book name</th><th>Download</th></tr>';
+        var html = '<tr><th>Book name</th><th>Author</th><th>Description</th><th>Download</th></tr>';
         var x = 0;
         for (key in wdata) {
             if(match(wdata[key]['cat'],category)) {
                 x = x + 1;
                 var pdf = wdata[key]['pdf'];
-                html = html + '<tr><td>' + key + '</td><td><a href="' + pdf + '" download><button>getME</button></a></td></tr>';
+		var author = wdata[key]['author'];
+		var description = wdata[key]['desc'];
+                html = html + '<tr><td>' + key + '</td><td>' + author + '</td><td>' + description + '<td><a href="' + pdf + '" download>Direct Link</a></td></tr>';
             }
         }
         table.innerHTML = html;
-        document.getElementById("stats").innerHTML = "Total No of Books " + x;
+        document.getElementById("stats").innerHTML = "Total number of Books available to download: " + x;
     }
     function match(list,value){
         for(c in list)
@@ -40,5 +48,6 @@
     }
     loadcat();
 </script>
+</div>
 </body>
 </html>
